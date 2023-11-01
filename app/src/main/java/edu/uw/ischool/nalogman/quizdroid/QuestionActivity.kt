@@ -42,6 +42,9 @@ class QuestionActivity : AppCompatActivity() {
                 Log.d("wtf", "Current Question:$questionNumber")
                 intent.putExtra("questionNumber", questionNumber + 1)
                 intent.putExtra("totalQuestions",totalQuestions)
+                intent.putExtra("questions",selectedTopic.questions.toTypedArray())
+                val totalCorrect = selectedTopic.questions.count { it.userAnswerIndex == it.correctAnswerIndex  }
+                intent.putExtra("totalCorrect", totalCorrect)
                 startActivity(intent)
             } else {
                 // Handle the case when no radio button is selected
