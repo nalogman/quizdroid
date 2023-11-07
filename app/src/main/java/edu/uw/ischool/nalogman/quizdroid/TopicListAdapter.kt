@@ -11,25 +11,29 @@ class TopicListAdapter(
     private val onItemClick: (Topic) -> Unit
 ) : RecyclerView.Adapter<TopicListAdapter.TopicViewHolder>() {
 
+    inner class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        val titleTextView: TextView = itemView.findViewById(R.id.titleTextView)
+        val descriptionTextView: TextView = itemView.findViewById(R.id.descriptionTextView)
+    }
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): TopicViewHolder {
-        val view = LayoutInflater.from(parent.context)
-            .inflate(R.layout.item_topic, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.topic_list_item, parent, false)
         return TopicViewHolder(view)
     }
 
     override fun onBindViewHolder(holder: TopicViewHolder, position: Int) {
-        val topic = topics[position]
-        holder.bind(topic)
-        holder.itemView.setOnClickListener { onItemClick(topic) }
+        val currentTopic = topics[position]
+
+        holder.titleTextView.text = currentTopic.name
+        holder.descriptionTextView.text = currentTopic.description
+
+        holder.itemView.setOnClickListener {
+            onItemClick(currentTopic)
+        }
     }
 
-    override fun getItemCount(): Int = topics.size
-
-    inner class TopicViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val topicNameTextView: TextView = itemView.findViewById(R.id.topicNameTextView)
-
-        fun bind(topic: Topic) {
-            topicNameTextView.text = topic.name
-        }
+    override fun getItemCount(): Int {
+        return topics.size
     }
 }

@@ -18,7 +18,7 @@ class QuestionActivity : AppCompatActivity() {
         val selectedTopic = intent.getSerializableExtra("selectedTopic") as Topic
         val questionNumber = intent.getIntExtra("questionNumber", 1)
         val question = selectedTopic.questions[questionNumber - 1]
-        val totalQuestions = selectedTopic.totalQuestions
+        val totalQuestions = intent.getIntExtra("totalQuestions", 0)
         val questionTextView: TextView = findViewById(R.id.questionTextView)
         val radioGroup: RadioGroup = findViewById(R.id.radioGroup)
         val submitButton: Button = findViewById(R.id.submitButton)

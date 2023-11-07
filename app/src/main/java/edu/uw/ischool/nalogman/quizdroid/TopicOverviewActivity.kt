@@ -18,11 +18,12 @@ class TopicOverviewActivity : AppCompatActivity() {
         val topicDescriptionTextView: TextView = findViewById(R.id.topicDescriptionTextView)
         val totalQuestionsTextView: TextView = findViewById(R.id.totalQuestionsTextView)
         val beginButton: Button = findViewById(R.id.beginButton)
-        val totalQuestions = selectedTopic.totalQuestions
+        val totalQuestions = intent.getIntExtra("totalQuestions", 0)
+        val longDescription = intent.getStringExtra("longDescription") // Retrieve long description
 
         topicNameTextView.text = selectedTopic.name
-        topicDescriptionTextView.text = selectedTopic.description
-        totalQuestionsTextView.text = getString(R.string.total_questions, selectedTopic.totalQuestions)
+        topicDescriptionTextView.text = selectedTopic.longDescription
+        totalQuestionsTextView.text = getString(R.string.total_questions, totalQuestions)
 
         beginButton.setOnClickListener {
             // Handle Begin button click, navigate to QuestionActivity
